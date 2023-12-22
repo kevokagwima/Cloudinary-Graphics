@@ -1,18 +1,12 @@
 from flask import Flask, render_template, redirect, url_for, request, jsonify, flash
 from flask_cors import CORS, cross_origin
-from flask_bootstrap import Bootstrap
 import cloudinary, json, os
-from flask_pymongo import PyMongo
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "SECRET_KEY"
-app.config["MONGO_DBNAME"] = "Graphics"
-app.config["MONGO_URI"] = "mongodb+srv://kevokagwima:Hunter9039@cluster0.ousxbne.mongodb.net/Graphic"
 
-mongo = PyMongo(app)
 ALLOWED_EXTENSIONS = ["png", "jpg", "jpeg", "gif","mp4", "mkv"]
-Bootstrap(app)
 CORS(app)
 cloudinary.config( 
   cloud_name = "dqk8ah8sy", 
@@ -78,17 +72,11 @@ def upload_media(folder_name):
     return redirect(url_for("asset_folder", parent_folder="Graphics",folder_name=folder_name))
   return render_template("upload-media.html", folder=folder_name)
 
-# @app.route("/upload-video/<string:folder_name>", methods=["POST", "GET"])
-# @cross_origin()
-# def upload_video(folder_name):
-#   if request.method == "POST":
-#     file = request.files["file"]
-#     if file and file.filename.split(".")[-1].lower() in ALLOWED_EXTENSIONS:
-#       upload_result = cloudinary.uploader.upload(file, resource_type="video", folder=f"Graphics/{folder_name}")
-#       flash("Successfully uploaded video to gallery!", category="success")
-#     else:
-#       flash("An error occurred while uploading the image!", category="danger")
-#   return redirect(url_for("home"))
+@app.route("/delete-media/<string:parent_folder>/<string:folder_name>")
+def delete_media(parent_folder, folder_name):
+  media_to_delete = cloudinary.api.delete_resources_by_prefix(prefix=f"{parent_folder}/{folder_name}")
+  flash(f"Media deleted successfully", category="success")
+  return redirect(url_for('home'))
 
 if __name__ == "__main__":
   app.run(debug=True)

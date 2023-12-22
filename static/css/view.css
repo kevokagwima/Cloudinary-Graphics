@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1rem;
 }
 
 #upload {
@@ -12,7 +13,7 @@
 .resources {
   margin-top: 1rem;
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   gap: 1rem;
 }
 
@@ -22,6 +23,24 @@
 
 .resources {
   margin-top: 1rem;
+}
+
+/* .resource {
+  background-color: white;
+  display: grid;
+} */
+
+.resource-info {
+  padding: 1rem;
+}
+
+#delete {
+  background-color: red;
+  padding: 0.5em 1em;
+  border-radius: var(--radius);
+  font-family: var(--text-font);
+  color: whitesmoke;
+  font-size: 1.8ch;
 }
 
 .folder {

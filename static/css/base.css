@@ -92,7 +92,8 @@ header {
   outline: 1px solid var(--sec-bgcolor);
 }
 
-img {
+img,
+video {
   border-radius: var(--radius);
   min-height: 8rem;
   max-height: 8rem;
