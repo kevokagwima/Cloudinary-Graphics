@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/create-folder.css') }}">
+{% endblock %}
+
+{% block title %}
+New Folder
+{% endblock %}
+
+{% block body %}
+<form action="{{ url_for('create_folder') }}" method="post">
+  <div class="input">
+    <label for="name">Folder Name</label>
+    <input required type="text" name="folder-name" id="name" placeholder="Name of folder">
+  </div>
+  <button type="submit">Create</button>
+</form>
+{% endblock %}

@@ -1,0 +1,39 @@
+.folder-box h1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#upload {
+  padding: 0.5em 1em;
+}
+
+.folders,
+.resources {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 1rem;
+}
+
+.folders {
+  grid-template-columns: 1fr;
+}
+
+.resources {
+  margin-top: 1rem;
+}
+
+.folder {
+  font-family: var(--text-font);
+  padding: 0.8rem;
+  background-color: var(--main-bgcolor);
+  color: whitesmoke;
+  border-radius: var(--radius);
+}
+
+@media screen and (max-width: 1200px) {
+  .gallery-box {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

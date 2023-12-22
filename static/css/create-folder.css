@@ -1,0 +1,32 @@
+form {
+  padding: 2rem;
+  background-color: white;
+  display: grid;
+  border-radius: var(--radius);
+  max-width: 40%;
+  margin: 2rem auto 0;
+}
+
+.input {
+  display: grid;
+  gap: 0.8rem;
+}
+
+label {
+  font-family: var(--text-font);
+}
+
+input {
+  border: none;
+  border-radius: var(--radius);
+  padding: 1em;
+  font-family: var(--text-font);
+  font-size: 2.2ch;
+  background-color: whitesmoke;
+}
+
+button {
+  margin-top: 2rem;
+  padding: 1em;
+  text-transform: uppercase;
+}

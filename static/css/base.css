@@ -1,0 +1,118 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Moonrocks&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Changa+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Proza+Libre&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --main-bgcolor: #7b66ff;
+  --sec-bgcolor: #96efff;
+  --heading-font: "Changa One", sans-serif;
+  --text-font: "Hanken Grotesk", sans-serif;
+  --btn-font: "Proza Libre", sans-serif;
+  --logo-font: "Rubik Moonrocks", sans-serif;
+  --radius: 0.3rem;
+}
+
+::-webkit-scrollbar {
+  background-color: whitesmoke;
+  max-width: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 30rem;
+  background-color: var(--main-bgcolor);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--text-font);
+}
+
+p {
+  font-family: var(--text-font);
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--btn-font);
+  border: none;
+  border-radius: var(--radius);
+  background-color: var(--main-bgcolor);
+  color: whitesmoke;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 10px -6px black;
+}
+
+body {
+  background-color: whitesmoke;
+}
+
+header {
+  padding: 1rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: 0.2s ease-in-out;
+  box-shadow: 0 0 10px -8px black;
+}
+
+.header-style {
+  background-color: white;
+  box-shadow: 0 0 10px -8px black;
+}
+
+#logo {
+  font-family: var(--heading-font);
+  color: var(--main-bgcolor);
+  font-size: 4.5ch;
+}
+
+.container {
+  padding: 1rem 3rem;
+}
+
+#hr {
+  border: none;
+  outline: 1px solid var(--sec-bgcolor);
+}
+
+img {
+  border-radius: var(--radius);
+  min-height: 8rem;
+  max-height: 8rem;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position: center;
+}
+
+.alert {
+  padding: 0.5rem;
+  text-align: center;
+  font-family: var(--text-font);
+}
+
+.alert-success {
+  background-color: green;
+  color: white;
+}
+
+.alert-danger {
+  background-color: red;
+  color: white;
+}

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block body %}
+<div class="folder-box">
+  <h1>
+    My Folders
+    <a href="{{ url_for('create_folder') }}">
+      <span id="new-folder">
+        <button title="Add new folder">+</button>
+      </span>
+    </a>
+  </h1>
+  <hr id="hr">
+  <div class="folders">
+    {% for folder in folders %}
+    <div class="folder-items">
+      <a href="{{ url_for('asset_folder',parent_folder='Graphics', folder_name=folder.name) }}">
+        <div class="folder">
+          <p>{{ folder.name }}</p>
+        </div>
+      </a>
+      <a href="{{ url_for('delete_folder', folder_name=folder.name) }}">
+        <div class="delete">
+          <img id="delete" src="{{ url_for('static', filename='images/delete.png') }}" alt="">
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<div class="menu">
+  <h1>My Media</h1>
+  <hr id="hr">
+  <div class="resources">
+    {% for result in results %}
+    <div class="resource">
+      <img src="{{ result.secure_url }}" alt="">
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script defer src="index.js"></script>
+{% endblock %}

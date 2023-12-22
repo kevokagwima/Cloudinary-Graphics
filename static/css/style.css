@@ -1,0 +1,83 @@
+.container {
+  display: grid;
+  grid-template-columns: 15rem auto;
+  gap: 1rem;
+}
+
+.folder-box,
+.menu {
+  border-radius: var(--radius);
+  background-color: white;
+  min-height: 85svh;
+  max-height: 85svh;
+  overflow-y: scroll;
+  position: relative;
+}
+
+.folder-box h1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.folder-box h1,
+.menu h1 {
+  padding: 0.5rem 1rem;
+  position: sticky;
+  top: 0;
+  background-color: white;
+}
+
+#new-folder button {
+  padding: 0.2em 0.5em;
+}
+
+.folders,
+.resources {
+  padding-inline: 1rem;
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+}
+
+.folders {
+  grid-template-columns: 1fr;
+}
+
+.resources {
+  margin-top: 1rem;
+}
+
+.folder-items {
+  display: grid;
+  grid-template-columns: auto 1rem;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.folder {
+  font-family: var(--text-font);
+  padding: 0.8rem;
+  background-color: var(--main-bgcolor);
+  color: whitesmoke;
+  border-radius: var(--radius);
+}
+
+.folder > p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.delete img {
+  min-height: 1.5rem;
+  max-height: 1.5rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .gallery-box {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

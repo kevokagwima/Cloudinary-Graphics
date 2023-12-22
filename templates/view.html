@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/view.css') }}">
+{% endblock %}
+
+{% block title %}
+{{ folder }}
+{% endblock %}
+
+{% block body %}
+<div class="folder-box">
+  <h1>
+    {{ folder }}
+    <a href="{{ url_for('upload_media', folder_name=folder) }}">
+      <button id="upload">Upload Media</button>
+    </a>
+  </h1>
+  <div class="folders">
+    {% for folder in folders %}
+    <div class="folder">
+      {{ folder.name }}
+    </div>
+    {% endfor %}
+  </div>
+  <div class="resources">
+    {% for result in results %}
+    <div class="resource">
+      {% if result.resource_type == "image" %}
+      <img src="{{ result.secure_url }}" alt="">
+      {% else %}
+      <video controls src="{{ result.secure_url }}"></video>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
