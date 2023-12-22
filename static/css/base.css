@@ -65,6 +65,7 @@ header {
   justify-content: space-between;
   align-items: center;
   background-color: white;
+  min-width: 100%;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -95,11 +96,18 @@ header {
 img,
 video {
   border-radius: var(--radius);
-  min-height: 8rem;
-  max-height: 8rem;
+  min-height: 10rem;
+  max-height: 10rem;
   aspect-ratio: 1/1;
   object-fit: cover;
   object-position: center;
+  cursor: pointer;
+}
+
+video {
+  min-height: 15rem;
+  max-height: 15rem;
+  min-width: 100%;
 }
 
 .alert {
@@ -109,11 +117,63 @@ video {
 }
 
 .alert-success {
-  background-color: green;
-  color: white;
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.alert-info {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+.alert-warning {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
 }
 
 .alert-danger {
-  background-color: red;
-  color: white;
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+.btn {
+  position: relative;
+}
+
+.button--text {
+  transition: all 0.2s;
+}
+
+.btn--loading .button--text {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.btn--loading::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 20px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: 3px solid transparent;
+  border-top-color: white;
+  border-radius: 50%;
+  animation: button-loading-spinner 1s ease infinite;
+}
+
+@keyframes button-loading-spinner {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
 }

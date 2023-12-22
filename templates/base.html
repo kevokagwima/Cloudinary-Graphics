@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-  <title>Graphics | {% block title %}{% endblock %}</title>
+  <title>Pioneer Graphics | {% block title %}{% endblock %}</title>
 </head>
 {% endblock %}
 
@@ -24,7 +24,9 @@
   <section class="container">
     {% block body %}{% endblock %}
   </section>
-  {% block script %}{% endblock %}
+  {% block script %}
+  {% endblock %}
+  <script defer src="{{ url_for('static', filename='js/base.js') }}"></script>
 </body>
 
 </html>

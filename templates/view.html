@@ -10,16 +10,24 @@
 {% endblock %}
 
 {% block body %}
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+</div>
 <div class="folder-box">
-  <h1>
-    {{ folder }}
-    <a href="{{ url_for('upload_media', folder_name=folder) }}">
-      <button id="upload">Upload Media</button>
-    </a>
-  </h1>
-  <a id="delete" href="{{ url_for('delete_media', parent_folder='Graphics', folder_name=folder) }}">
-    Delete All
-  </a>
+  <div class="folder-header">
+    <h1>{{ folder }}</h1>
+    <div class="actions">
+      {% if images or videos %}
+      <a id="delete" href="{{ url_for('delete_media', parent_folder='Graphics', folder_name=folder) }}">
+        Delete All Media
+      </a>
+      {% endif %}
+      <a href="{{ url_for('upload_media', folder_name=folder) }}">
+        <button id="upload">Upload Media</button>
+      </a>
+    </div>
+  </div>
   <div class="folders">
     {% for folder in folders %}
     <div class="folder">
@@ -27,18 +35,36 @@
     </div>
     {% endfor %}
   </div>
-  <div class="resources">
-    {% for result in results %}
+  <div class="resources-box">
     <div class="resource">
-      <div class="resource-img">
-        <img src="{{ result.url }}" alt="">
+      {% if images or videos %}
+      <div class="resource-type">
+        <div class="type" onclick="openView(event, 'image')" id="defaultOpen">
+          <p>Images</p>
+        </div>
+        <div class="type" onclick="openView(event, 'video')">
+          <p>Videos</p>
+        </div>
       </div>
-      <div class="resource-info">
-        <!-- <p>{{ result }}</p> -->
+      {% endif %}
+      <div class="resources">
+        <div id="image" class="resource-img">
+          {% for result in images %}
+          <img id="gallery-img" src="{{ result.url }}" alt="">
+          {% endfor %}
+        </div>
+        <div id="video" class="resource-img">
+          {% for result in videos %}
+          <video controls src="{{ result.url }}"></video>
+          {% endfor %}
+        </div>
       </div>
     </div>
-    {% endfor %}
   </div>
 </div>
 
+{% endblock %}
+
+{% block script %}
+<script defer src="{{ url_for('static', filename='js/view.js') }}"></script>
 {% endblock %}

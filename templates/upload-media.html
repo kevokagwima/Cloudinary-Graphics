@@ -13,8 +13,10 @@ Upload Media
 <form action="{{ url_for('upload_media',folder_name=folder) }}" method="post" enctype="multipart/form-data">
   <div class="input">
     <label for="name">Select Media</label>
-    <input required type="file" name="image" id="name" accept="/*" multiple>
+    <input required type="file" name="image" id="name" accept=".png, .jpg, .jpeg, .gif, .mp4, .mkv, .jfif" multiple>
   </div>
-  <button type=" submit">Upload</button>
+  <button class="btn" type="submit">
+    <span class="button--text">Upload</span>
+  </button>
 </form>
 {% endblock %}
