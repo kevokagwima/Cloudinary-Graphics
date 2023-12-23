@@ -17,16 +17,25 @@
       <a id="logo" href="{{ url_for('home') }}">Graphics</a>
     </div>
   </header>
-  {% with messages = get_flashed_messages(with_categories=true) %} {% if
-  messages %} {% for category, message in messages %}
-  <div class="alert alert-{{ category }}" role="alert">{{ message }}</div>
-  {% endfor %} {% endif %} {% endwith %}
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  {% for category, message in messages %}
+  <div class="alert alert-{{ category }}" role="alert">
+    <span id="close" onclick="this.parentElement.style.display = 'none';">X</span>
+    <p>{{ message }}</p>
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+
   <section class="container">
     {% block body %}{% endblock %}
   </section>
+
   {% block script %}
   {% endblock %}
-  <script defer src="{{ url_for('static', filename='js/base.js') }}"></script>
+  <!-- <script defer src="{{ url_for('static', filename='js/base.js') }}"></script> -->
 </body>
 
 </html>

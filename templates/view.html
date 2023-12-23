@@ -50,7 +50,7 @@
       <div class="resources">
         <div id="image" class="resource-img">
           {% for result in images %}
-          <img id="gallery-img" src="{{ result.url }}" alt="">
+          <img id="gallery-img" class="gallery-img" src="{{ result.url }}" alt="{{ result.url }}">
           {% endfor %}
         </div>
         <div id="video" class="resource-img">

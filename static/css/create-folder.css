@@ -30,3 +30,13 @@ button {
   padding: 1em;
   text-transform: uppercase;
 }
+
+#more-info {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+#more-info span {
+  font-family: var(--text-font);
+  color: grey;
+}

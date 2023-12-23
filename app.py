@@ -19,29 +19,41 @@ import cloudinary.uploader
 import cloudinary.api
 config = cloudinary.config(secure=True)
 
+@app.before_request
+def check_connection():
+  try:
+    cloudinary.api.ping()
+  except:
+    return "No connection to your media. Check your internet connection"
+
 @app.route("/")
 @app.route("/home")
 def home():
-  gallery = cloudinary.api.resources()
   folders = cloudinary.api.subfolders("Graphics")
   results = cloudinary.api.resources(type = "upload", prefix = "Graphics/Test")
-  return render_template("index.html", gallery=gallery, folders=folders['folders'], results=results['resources'])
+  return render_template("index.html", folders=folders['folders'], results=results['resources'])
 
 @app.route("/media/<string:parent_folder>/<string:folder_name>")
 def asset_folder(parent_folder, folder_name):
-  images = cloudinary.api.resources(type="upload", prefix=f"{parent_folder}/{folder_name}", max_results=50)
-  videos = cloudinary.api.resources(type="upload", prefix=f"{parent_folder}/{folder_name}", max_results=50, resource_type="video")
-  raw_media = cloudinary.api.resources(type="upload", prefix=f"{parent_folder}/{folder_name}", max_results=50, resource_type="raw")
+  images = cloudinary.api.resources(type="upload", prefix=f"{parent_folder}/{folder_name}", max_results=500)
+  videos = cloudinary.api.resources(type="upload", prefix=f"{parent_folder}/{folder_name}", max_results=500, resource_type="video")
 
-  return render_template("view.html", images=images['resources'], videos=videos['resources'], raw=raw_media['resources'], folder=folder_name)
+  return render_template("view.html", images=images['resources'], videos=videos['resources'], folder=folder_name)
 
 @app.route("/create-folder", methods=["POST", "GET"])
 def create_folder():
   if request.method == "POST":
+    folders = cloudinary.api.subfolders("Graphics")
+    existing_folders = []
+    for folder in folders['folders']:
+      existing_folders.append(folder['name'])
     new_folder = request.form.get("folder-name")
-    cloudinary.api.create_folder(f"Graphics/{new_folder}")
-    flash(f"Folder {new_folder} created successfully", category="success")
-    return redirect(url_for('home'))
+    if new_folder in existing_folders:
+      flash(f"Folder with name {new_folder} already exists", category="danger")
+    else:
+      cloudinary.api.create_folder(f"Graphics/{new_folder}")
+      flash(f"Folder {new_folder} created successfully", category="success")
+      return redirect(url_for('home'))
   return render_template("create-folder.html")
 
 @app.route("/delete-folder/<string:folder_name>")
@@ -61,7 +73,7 @@ def upload_media(folder_name):
     files_list = request.files.getlist("image")
     for file in files_list:
       if file.filename.split(".")[-1].lower() not in ALLOWED_EXTENSIONS:
-        flash(f"Only media of type  {ALLOWED_EXTENSIONS} are allowed", category="danger")
+        flash(f"Only media of type  {ALLOWED_EXTENSIONS} are allowed", category="warning")
         return redirect(url_for("asset_folder", parent_folder="Graphics",folder_name=folder_name))
       if file and file.filename.split(".")[-1].lower() in ALLOWED_EXTENSIONS:
         cloudinary.uploader.upload(file, folder=f"Graphics/{folder_name}", resource_type="auto", use_filename=True)

@@ -62,9 +62,6 @@
 }
 
 .resource-img {
-  /* background-color: white;
-  border-radius: var(--radius);
-  padding: 1rem; */
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 1rem;
