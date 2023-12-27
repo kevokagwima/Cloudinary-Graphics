@@ -40,3 +40,21 @@ button {
   font-family: var(--text-font);
   color: grey;
 }
+
+@media screen and (max-width: 1000px) {
+  form {
+    max-width: 70%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  form {
+    max-width: 90%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  form {
+    max-width: 100%;
+  }
+}
