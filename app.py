@@ -24,8 +24,7 @@ def check_connection():
   try:
     cloudinary.api.ping()
   except:
-    # return "No connection to your media. Check your internet connection"
-    flash("No connection to your stored media", category="info")
+    return "No connection to your media. Check your internet connection"
 
 @app.route("/")
 @app.route("/home")
