@@ -1,4 +1,4 @@
-.container {
+main {
   display: grid;
   grid-template-columns: 15rem auto;
   gap: 1rem;
@@ -32,20 +32,16 @@
   padding: 0.2em 0.5em;
 }
 
-.folders,
-.resources {
-  padding-inline: 1rem;
+.folders {
+  padding: 1rem;
   margin-top: 1rem;
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: 1fr;
   gap: 1rem;
 }
 
-.folders {
-  grid-template-columns: 1fr;
-}
-
 .resources {
+  padding: 1rem;
   margin-top: 1rem;
 }
 
@@ -76,8 +72,64 @@
   max-height: 1.5rem;
 }
 
-@media screen and (max-width: 1200px) {
-  .gallery-box {
+.resource-img {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+}
+
+@media screen and (max-width: 1500px) {
+  .resource-img {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .resource-img {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+
+  .folder-box,
+  .menu {
+    min-height: max-content;
+  }
+
+  .folders {
+    display: flex;
+    gap: 2rem;
+    overflow-x: scroll;
+    margin: 0;
+  }
+
+  .resources {
+    margin: 0;
+  }
+
+  .resource-img {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .resource-img {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .resource-img {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .resource-img {
+    grid-template-columns: 1fr;
   }
 }

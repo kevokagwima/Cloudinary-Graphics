@@ -178,17 +178,30 @@
   #video {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .modal-content {
+    max-height: 20rem;
+  }
 }
 
 @media screen and (max-width: 700px) {
   .resource-img {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .modal-content {
+    max-height: 15rem;
+  }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   .resource-img,
   #video {
     grid-template-columns: 1fr;
+  }
+
+  .folder-header {
+    flex-direction: column;
+    align-items: start;
   }
 }
