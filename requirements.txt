@@ -1,4 +1,5 @@
 aniso8601==9.0.1
+beautifulsoup4==4.12.2
 blinker==1.7.0
 certifi==2023.11.17
 click==8.1.7
@@ -11,15 +12,18 @@ Flask-Bootstrap4==4.0.2
 Flask-Cors==4.0.0
 Flask-PyMongo==2.3.0
 Flask-RESTful==0.3.10
+google==3.0.0
+gunicorn==21.2.0
 importlib-metadata==7.0.0
 itsdangerous==2.1.2
 Jinja2==3.1.2
 MarkupSafe==2.1.3
+packaging==23.2
 pymongo==4.6.1
 pytz==2023.3.post1
 six==1.16.0
+soupsieve==2.5
 urllib3==2.1.0
 visitor==0.1.3
 Werkzeug==3.0.1
 zipp==3.17.0
-google-appengine==1.9.88
