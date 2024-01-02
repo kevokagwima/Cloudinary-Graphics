@@ -1,7 +1,9 @@
 from flask import Flask, render_template, redirect, url_for, request, flash, session
+from flask_heroku import Heroku
 import cloudinary, os
 
 app = Flask(__name__)
+heroku = Heroku(app)
 app.config["SECRET_KEY"] = os.environ["Hms_secret_key"]
 
 ALLOWED_EXTENSIONS = ["png", "jpg", "jpeg", "gif","mp4", "mkv", "jfif"]
