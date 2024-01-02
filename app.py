@@ -37,10 +37,13 @@ def home():
   else:
     folders = cloudinary.api.subfolders("Graphics")
     session["folders"] = folders
-    for folder in folders["folders"]:
-      results = cloudinary.api.resources(type = "upload", prefix = f"Graphics/{folder['name']}")
-      session["results"] = results
-    return render_template("index.html", folders=folders['folders'], results=results['resources'])
+    if folders["folders"]:
+      for folder in folders["folders"]:
+        results = cloudinary.api.resources(type = "upload", prefix = f"Graphics/{folder['name']}")
+        session["results"] = results
+      return render_template("index.html", folders=folders['folders'], results=results['resources'])
+    else:
+      return render_template("index.html", folders=folders['folders'])
 
 @app.route("/media/<string:parent_folder>/<string:folder_name>")
 def asset_folder(parent_folder, folder_name):
@@ -78,7 +81,6 @@ def create_folder():
 @app.route("/delete-folder/<string:folder_name>")
 def delete_folder(folder_name):
   folders = session["folders"]
-  print(folders)
   delete_folder = {
     'name': folder_name,
     'path': f"Graphics/{folder_name}"
