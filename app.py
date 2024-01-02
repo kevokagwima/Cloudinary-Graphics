@@ -36,13 +36,14 @@ def home():
     return render_template("index.html", folders=folders["folders"], results=results["resources"])
   else:
     folders = cloudinary.api.subfolders("Graphics")
-    session["folders"] = folders
     if folders["folders"]:
+      session["folders"] = folders
       for folder in folders["folders"]:
         results = cloudinary.api.resources(type = "upload", prefix = f"Graphics/{folder['name']}")
         session["results"] = results
       return render_template("index.html", folders=folders['folders'], results=results['resources'])
     else:
+      session["folders"] = []
       return render_template("index.html", folders=folders['folders'])
 
 @app.route("/media/<string:parent_folder>/<string:folder_name>")
