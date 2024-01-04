@@ -30,21 +30,22 @@ def check_connection():
 @app.route("/")
 @app.route("/home")
 def home():
-  if "folders" and "results" in session:
-    folders = session["folders"]
-    results = session["results"]
-    return render_template("index.html", folders=folders["folders"], results=results["resources"])
-  else:
-    folders = cloudinary.api.subfolders("Graphics")
-    if folders["folders"]:
-      session["folders"] = folders
-      for folder in folders["folders"]:
-        results = cloudinary.api.resources(type = "upload", prefix = f"Graphics/{folder['name']}")
-        session["results"] = results
-      return render_template("index.html", folders=folders['folders'], results=results['resources'])
-    else:
-      session["folders"] = []
-      return render_template("index.html", folders=folders['folders'])
+  # if "folders" and "results" in session:
+  #   folders = session["folders"]
+  #   results = session["results"]
+  #   return render_template("index.html", folders=folders["folders"], results=results["resources"])
+  # else:
+  folders = cloudinary.api.subfolders("Graphics")
+  if folders["folders"]:
+    # session["folders"] = folders
+    for folder in folders["folders"]:
+      results = cloudinary.api.resources(type = "upload", prefix = f"Graphics/{folder['name']}")
+      # session["results"] = results
+    return render_template("index.html", folders=folders['folders'], results=results['resources'])
+  return render_template("index.html", folders=folders['folders'])
+  # else:
+  #   session["folders"] = []
+  #   return render_template("index.html", folders=folders['folders'])
 
 @app.route("/media/<string:parent_folder>/<string:folder_name>")
 def asset_folder(parent_folder, folder_name):
@@ -55,49 +56,37 @@ def asset_folder(parent_folder, folder_name):
 
 @app.route("/create-folder", methods=["POST", "GET"])
 def create_folder():
-  if request.method == "POST":
+  if request.method == "POST":   
+    folders = cloudinary.api.subfolders(f"Graphics")
     existing_folders = []
-    if "folders" in session:
-      folders = session["folders"]
-      for folder in folders["folders"]:
-        existing_folders.append(folder['name'])
-    else:
-      folders = cloudinary.api.subfolders("Graphics")
-      for folder in folders['folders']:
-        existing_folders.append(folder['name'])
+    for folder in folders['folders']:
+      existing_folders.append(folder['name'])
     new_folder = request.form.get("folder-name")
     if new_folder in existing_folders:
       flash(f"Folder with name {new_folder} already exists", category="danger")
     else:
-      updated_folder = {
-        'name': new_folder,
-        'path': f"Graphics/{new_folder}"
-      }
       cloudinary.api.create_folder(f"Graphics/{new_folder}")
-      session["folders"]["folders"].append(updated_folder)
       flash(f"Folder {new_folder} created successfully", category="success")
       return redirect(url_for('home'))
   return render_template("create-folder.html")
 
 @app.route("/delete-folder/<string:folder_name>")
 def delete_folder(folder_name):
-  folders = session["folders"]
-  delete_folder = {
-    'name': folder_name,
-    'path': f"Graphics/{folder_name}"
-  }
-  images_media = []
-  videos_media = []
-  images = cloudinary.api.resources(type="upload", prefix=f"Graphics/{folder_name}", max_results=500)
-  videos = cloudinary.api.resources(type="upload", prefix=f"Graphics/{folder_name}", max_results=500, resource_type="video")
-  for image in images['resources']:
-    images_media.append(image)
-  for image in images['resources']:
-    videos_media.append(videos)
-  if images_media or videos_media:
+  # folders = session["folders"]
+  # delete_folder = {
+  #   'name': folder_name,
+  #   'path': f"Graphics/{folder_name}"
+  # }
+  # images_media = []
+  # videos_media = []
+  results = (cloudinary.api.resources(type="upload", prefix=f"Graphics/{folder_name}") or cloudinary.api.resources(type="upload", prefix=f"Graphics/{folder_name}", resource_type="video"))
+  # for image in images['resources']:
+  #   images_media.append(image)
+  # for image in images['resources']:
+  #   videos_media.append(videos)
+  if results["resources"]:
     flash("Cannot delete folder with media", category="danger")
   else:
-    session["folders"]["folders"].remove(delete_folder)
     cloudinary.api.delete_folder(f"Graphics/{folder_name}")
     flash(f"Folder {folder_name} deleted successfully", category="success")
   return redirect(url_for('home'))
