@@ -16,16 +16,16 @@ import cloudinary.uploader
 import cloudinary.api
 config = cloudinary.config(secure=True)
 
-# @app.before_request
-# def check_connection():
-#   if "status" in session:
-#     pass
-#   else:
-#     try:
-#       status = cloudinary.api.ping()
-#       session["status"] = status
-#     except:
-#       return "No connection to your media. Check your internet connection"
+@app.before_request
+def check_connection():
+  if "status" in session:
+    pass
+  else:
+    try:
+      status = cloudinary.api.ping()
+      session["status"] = status
+    except:
+      return "No connection to your media. Check your internet connection"
 
 @app.route("/")
 @app.route("/home")
