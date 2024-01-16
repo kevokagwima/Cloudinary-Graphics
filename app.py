@@ -28,6 +28,7 @@ config = cloudinary.config(secure=True)
 #       return "No connection to your media. Check your internet connection"
 
 @app.route("/")
+@app.route("/home")
 def home():
   return render_template("home.html")
 
