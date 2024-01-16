@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block body %}
+<div class="hero-info">
+  <h1>Transforming your ideas into stunning designs</h1>
+  <p>We are a personal graphic design agency dedicated to creating visually captivating and impactful designs that
+    resonate with your audience.</p>
+  <div class="hero-btns">
+    <a target="_blank" href="https://wa.me/0708162925">
+      <button class="btn" id="whatsapp">
+        <i class="fa fa-whatsapp"></i>
+        Get In Touch
+      </button>
+    </a>
+    <a target="_blank" href="mailto:pioneergraphics31@gmail.com">
+      <button class="btn">
+        <i class="fa fa-envelope-o"></i>
+        Email Us
+      </button>
+    </a>
+    <a href="{{ url_for('portfolio') }}">
+      <button class="btn" id="portfolio">
+        <i class="fa fa-film"></i>
+        Our Portfolio
+      </button>
+    </a>
+  </div>
+  <div class="hero-image"></div>
+</div>
+<div class="about">
+  <div class="about-info">
+    <h1>Who Are We?</h1>
+    <p>To help your company achieve its goals, Pioneer Studio and Design Work provides a comprehensive range of approved
+      and tried-and-true branding and marketing solutions. We also provide a first-client approach and a full spectrum
+      of
+      marketing experience value from poster design,IT services, digital marketing, Videography and photography.</p>
+  </div>
+  <div class="about-image"></div>
+</div>
+<div class="services">
+  <h1>Discover the Power of Graphic Design</h1>
+  <div class="services-box">
+    <div class="service">
+      <div class="services-image">
+        <img src="../static/Images/design2.jpg" alt="">
+      </div>
+      <div class="services-info">
+        <h4>Poster design and printing</h4>
+        <p>Our graphic design agency brings your vision to life through creative and innovative designs.</p>
+      </div>
+    </div>
+    <div class="service">
+      <div class="services-image">
+        <img src="../static/Images/design4.jpg" alt="">
+      </div>
+      <div class="services-info">
+        <h4>Photography and Videography</h4>
+        <p>We specialize in creating designs that captivate your audience and leave a lasting impression.</p>
+      </div>
+    </div>
+    <div class="service">
+      <div class="services-image">
+        <img src="../static/Images/design5.jpg" alt="">
+      </div>
+      <div class="services-info">
+        <h4>Digital marketing and Website development</h4>
+        <p>Our team of talented designers will help you establish a strong and cohesive brand identity.</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}
