@@ -3,6 +3,7 @@
 {% block head %}
 {{ super() }}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 {% endblock %}
 
 {% block title %}
@@ -21,6 +22,9 @@ Portfolio
       </a>
     </h1>
     <hr id="hr">
+    <div class="input">
+      <input type="search" name="search" id="search" placeholder="Search for folder">
+    </div>
     <div class="folders">
       {% for folder in folders %}
       <div class="folder-items">
@@ -38,7 +42,7 @@ Portfolio
       {% endfor %}
     </div>
   </div>
-  <div class="menu">
+  <!-- <div class="menu">
     <h1>My Media</h1>
     <hr id="hr">
     <div class="resources">
@@ -48,9 +52,10 @@ Portfolio
         {% endfor %}
       </div>
     </div>
-  </div>
+  </div> -->
 </main>
 {% endblock %}
 
 {% block script %}
+<script src="{{ url_for('static', filename='Js/index.js') }}"></script>
 {% endblock %}

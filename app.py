@@ -53,7 +53,7 @@ def portfolio():
 
 @app.route("/media/<string:parent_folder>/<string:folder_name>")
 def asset_folder(parent_folder, folder_name):
-  images = cloudinary.api.resources(type="upload", prefix=f"{parent_folder}/{folder_name}", max_results=500)
+  images = cloudinary.api.resources(type="upload", prefix=f"{parent_folder}/{folder_name}", max_results=500, quality=10)
   videos = cloudinary.api.resources(type="upload", prefix=f"{parent_folder}/{folder_name}", max_results=500, resource_type="video")
 
   return render_template("view.html", images=images['resources'], videos=videos['resources'], folder=folder_name)
@@ -71,7 +71,7 @@ def create_folder():
     else:
       cloudinary.api.create_folder(f"Graphics/{new_folder}")
       flash(f"Folder {new_folder} created successfully", category="success")
-      return redirect(url_for('home'))
+      return redirect(url_for('portfolio'))
   return render_template("create-folder.html")
 
 @app.route("/delete-folder/<string:folder_name>")
@@ -93,7 +93,7 @@ def delete_folder(folder_name):
   else:
     cloudinary.api.delete_folder(f"Graphics/{folder_name}")
     flash(f"Folder {folder_name} deleted successfully", category="success")
-  return redirect(url_for('home'))
+  return redirect(url_for('portfolio'))
 
 @app.route("/upload-media/<string:folder_name>", methods=["POST", "GET"])
 def upload_media(folder_name):
@@ -101,7 +101,7 @@ def upload_media(folder_name):
     files_list = request.files.getlist("image")
     for file in files_list:
       if file.filename.split(".")[-1].lower() not in ALLOWED_EXTENSIONS:
-        flash(f"Only media of type  {ALLOWED_EXTENSIONS} are allowed", category="warning")
+        flash(f"Only media of type  {ALLOWED_EXTENSIONS} are allowed", category="info")
         return redirect(url_for("asset_folder", parent_folder="Graphics",folder_name=folder_name))
       if file and file.filename.split(".")[-1].lower() in ALLOWED_EXTENSIONS:
         cloudinary.uploader.upload(file, folder=f"Graphics/{folder_name}", resource_type="auto", use_filename=True)
@@ -116,8 +116,8 @@ def upload_media(folder_name):
 def delete_media(parent_folder, folder_name):
   (cloudinary.api.delete_resources_by_prefix(prefix=f"{parent_folder}/{folder_name}") and cloudinary.api.delete_all_resources(prefix=f"{parent_folder}/{folder_name}", resource_type="video"))
   flash(f"Media deleted successfully", category="success")
-  session.pop("results")
-  return redirect(url_for('home'))
+  # session.pop("results")
+  return redirect(url_for("asset_folder", parent_folder="Graphics",folder_name=folder_name))
 
 if __name__ == "__main__":
   app.run(debug=True)

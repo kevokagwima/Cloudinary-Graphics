@@ -1,6 +1,6 @@
 form {
   padding: 2rem;
-  background-color: white;
+  background-color: #212121;
   display: grid;
   border-radius: var(--radius);
   max-width: 40%;
@@ -14,6 +14,7 @@ form {
 
 label {
   font-family: var(--text-font);
+  color: white;
 }
 
 input {
@@ -22,7 +23,8 @@ input {
   padding: 1em;
   font-family: var(--text-font);
   font-size: 2.2ch;
-  background-color: whitesmoke;
+  background-color: #343434;
+  color: whitesmoke;
 }
 
 button {

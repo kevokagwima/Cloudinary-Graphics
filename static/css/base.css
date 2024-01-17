@@ -10,9 +10,9 @@
 }
 
 :root {
-  --main-bgcolor: #7b66ff;
-  --sec-bgcolor: #96efff;
-  --heading-font: "Changa One", sans-serif;
+  --main-bgcolor: #c8de24;
+  --sec-bgcolor: #a3b51e;
+  --heading-font: "Changa One", s ans-serif;
   --text-font: "Hanken Grotesk", sans-serif;
   --btn-font: "Proza Libre", sans-serif;
   --logo-font: "Rubik Moonrocks", sans-serif;
@@ -20,7 +20,7 @@
 }
 
 ::-webkit-scrollbar {
-  background-color: whitesmoke;
+  background-color: #212121;
   max-width: 0.5rem;
   max-height: 0.5rem;
 }
@@ -49,15 +49,19 @@ button {
   font-family: var(--btn-font);
   border: none;
   border-radius: var(--radius);
-  background-color: var(--main-bgcolor);
+  background-color: var(--sec-bgcolor);
   color: whitesmoke;
   cursor: pointer;
   font-weight: bold;
   box-shadow: 0 0 10px -6px black;
 }
 
+input:focus {
+  outline: 1px solid var(--sec-bgcolor);
+}
+
 body {
-  background-color: whitesmoke;
+  background-color: black;
 }
 
 header {
@@ -65,7 +69,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  background-color: #212121;
   min-width: 100%;
   position: sticky;
   top: 0;

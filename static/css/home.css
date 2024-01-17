@@ -7,6 +7,7 @@
   padding: 2rem 4rem;
   display: grid;
   gap: 1rem;
+  color: white;
 }
 
 .hero-info h1 {
@@ -65,13 +66,13 @@
   gap: 1rem;
   align-items: center;
   padding: 4rem;
-  background-color: white;
 }
 
 .about-info {
   display: grid;
   gap: 1rem;
   text-align: center;
+  color: white;
 }
 
 .about-info h1,
@@ -98,6 +99,7 @@
 
 .services {
   padding: 4rem;
+  color: white;
 }
 
 .services > h1 {
@@ -131,6 +133,7 @@
 
 .services-info {
   text-align: center;
+  color: white;
 }
 
 .services-info h4 {
